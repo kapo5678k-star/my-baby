@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كوكبنا</title>
+
+<style>
+* { box-sizing: border-box; }
+/* كرت الفيديو الأخير فقط */
+
+.last-video-card {
+    padding: 10px;
+}
+
+/* الفيديو نفسه */
+.last-video {
+    width: 1%;
+    height: 550px;          /* المقاس اللي تحبيه */
+    border-radius: 18px;
+    object-fit: cover;     /* TikTok style */
+    background: black;
+}
+
+/* لو عايزة تمنعي أي تكبير غصب */
+.last-video::-webkit-media-controls-fullscreen-button {
+    display: none;
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #7b0000, #b30000);
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.lock-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    pointer-events: none;
+    animation: fall linear infinite;
+    opacity: .9;
+    z-index: 1;
+}
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    z-index: 2;
+}
+
+.card {
+    background: #fff;
+    border-radius: 30px;
+    padding: 25px 20px 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.year {
+    background: #b22222;
+    color: white;
+    padding: 8px 30px;
+    border-radius: 25px;
+    font-size: 18px;
+    display: inline-block;
+    animation: yearPulse 2.5s ease-in-out infinite;
+}
+@keyframes yearPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05) translateY(-4px); }
+    100% { transform: scale(1); }
+}
+
+.wave {
+    animation: wave 3s ease-in-out infinite;
+}
+@keyframes wave {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+    100% { transform: translateY(0); }
+}
+
+input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 16px;
+    border-radius: 35px;
+    background: #b22222;
+    color: white;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+}
+.next-btn {
+    width: fit-content !important;
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 12px 32px !important;
+    font-size: 15px !important;
+    border-radius: 30px !important;
+    background: linear-gradient(135deg, #ff4d6d, #b30000) !important;
+    color: white !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    margin-top: 16px !important;
+}
+
+.icons span {
+    font-size: 26px;
+    margin: 6px;
+    display: inline-block;
+    animation: wave 2.6s ease-in-out infinite;
+}
+.icons span:nth-child(2){animation-delay:.2s}
+.icons span:nth-child(3){animation-delay:.4s}
+.icons span:nth-child(4){animation-delay:.6s}
+.icons span:nth-child(5){animation-delay:.8s}
+
+.dear {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #b30000;
+    text-shadow:
+        0 0 6px rgba(255,255,255,0.8),
+        0 0 12px rgba(255,200,200,0.8),
+        0 0 20px rgba(255,150,150,0.9);
+    animation: softWave 4s ease-in-out infinite;
+}
+@keyframes softWave {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+.letter-wrapper {
+    max-height: 55vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+.letter {
+    text-align: right;
+    line-height: 2.1;
+    color: #7b0000;
+    font-size: 15.5px;
+    font-weight: 700;
+}
+.letter-paragraph {
+    margin-bottom: 24px;
+}
+
+.header-bar {
+    background: #ff7aa2;
+    color: white;
+   
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+.memories-title {
+    color: #ffb3c6;
+    font-size: 26px;
+    font-family: cursive;
+    margin: 10px 0 20px;
+    text-align: center;
+}
+.memory-card {
+    background: #fff;
+    border-radius: 25px;
+    padding: 12px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.25);
+    position: relative;
+}
+.memory-card img,
+.memory-card video {
+    width: 100%;
+    border-radius: 18px;
+}
+.memory-text {
+    text-align: center;
+    margin-top: 10px;
+    color: #7b0000;
+    font-weight: bold;
+}
+.footer-text {
+    text-align: center;
+    color: #ffdcdc;
+    font-size: 18px;
+    margin: 30px 0 15px;
+}
+.footer-btn {
+    background: #ff7aa2;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+}
+
+/* ===== الإضافة الوحيدة ===== */
+.hidden-video { display: none; }
+.video-wrapper { position: relative; }
+.play-btn {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    font-size: 32px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    cursor: pointer;
+}
+</style>
+
+<script>
+// ========== الثلج ==========
+function createSnowflake() {
+    const s = document.createElement("div");
+    s.className = "snowflake";
+    s.innerHTML = "♥️";
+    s.style.left = Math.random()*100+"vw";
+    s.style.fontSize = (Math.random()*10+10)+"px";
+    s.style.animationDuration = (Math.random()*5+5)+"s";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),10000);
+}
+setInterval(createSnowflake, 300);
+
+// ========== الموسيقى العامة ==========
+const AUDIO_SRC = "https://res.cloudinary.com/dkym3urrn/video/upload/v1777853601/Bahaa_Sultan_Ma3aya_2025_%D8%A8%D9%87%D8%A7%D8%A1_%D8%B3%D9%84%D8%B7%D8%A7%D9%86_%D9%85%D8%B9%D8%A7%D9%8A%D8%A7_%D8%A3%D8%BA%D9%86%D9%8A%D8%A9_%D9%81%D9%8A%D9%84%D9%85_%D9%88%D9%84__cut_148sec_jciivv.mp3";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const bgMusic = document.createElement('audio');
+    bgMusic.id = 'bgMusic';
+    bgMusic.loop = true;
+    bgMusic.volume = 0.3;
+    bgMusic.preload = 'auto';
+    bgMusic.src = AUDIO_SRC;
+    document.body.appendChild(bgMusic);
+
+    if (localStorage.getItem('playAudio') === 'true') {
+        // كمّل من نفس المكان اللي وقف عنده
+        const savedTime = parseFloat(localStorage.getItem('audioTime') || '0');
+        bgMusic.addEventListener('canplay', () => {
+            bgMusic.currentTime = savedTime;
+            bgMusic.play().catch(() => {
+                document.addEventListener('click', () => {
+                    if (localStorage.getItem('playAudio') === 'true') bgMusic.play().catch(()=>{});
+                }, { once: true });
+            });
+        }, { once: true });
+
+        // احفظ الـ currentTime كل ثانية
+        setInterval(() => {
+            if (!bgMusic.paused) {
+                localStorage.setItem('audioTime', bgMusic.currentTime);
+            }
+        }, 1000);
+
+        // احفظ قبل ما الصفحة تتغير
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('audioTime', bgMusic.currentTime);
+        });
+    }
+
+    document.querySelectorAll('video').forEach(video => {
+        video.addEventListener('play', () => {
+            document.querySelectorAll('video').forEach(v => { if (v !== video) v.pause(); });
+            bgMusic.pause();
+        });
+        video.addEventListener('pause', () => {
+            if (localStorage.getItem('playAudio') === 'true') bgMusic.play().catch(()=>{});
+        });
+        video.addEventListener('ended', () => {
+            if (localStorage.getItem('playAudio') === 'true') bgMusic.play().catch(()=>{});
+        });
+    });
+});
+
+function startWithAudio() {
+    localStorage.setItem('playAudio', 'true');
+    const bg = document.getElementById('bgMusic');
+    if (bg) bg.play().catch(()=>{});
+    window.location.href = 'timeline.html';
+}
+
+function playVideo() {
+    const v = document.getElementById("mainVideo");
+    const b = document.getElementById("playBtn");
+    if (v) { v.style.display = "block"; v.play(); }
+    if (b) b.style.display = "none";
+}
+</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+body {
+  background: radial-gradient(ellipse at 20%% 30%%, #0d0030 0%%, #000010 60%%, #000000 100%%);
+  min-height:100vh; font-family:'Tajawal',Arial,sans-serif;
+  display:flex; flex-direction:column; align-items:center;
+  padding:28px 16px 50px; overflow-x:hidden; color:white;
+}
+.planet-wrap { max-width:420px; width:100%%; }
+.page-title { text-align:center; color:#fff; font-size:26px; font-weight:900; margin-bottom:6px;
+  text-shadow:0 0 30px rgba(255,150,200,0.8), 0 2px 8px rgba(0,0,0,.6); }
+.page-sub { text-align:center; color:rgba(255,180,210,0.8); font-size:14px; margin-bottom:22px; }
+.space-card {
+  background:rgba(0,0,30,0.6); border:1px solid rgba(255,150,200,0.15);
+  border-radius:28px; padding:0; margin-bottom:18px; overflow:hidden;
+  box-shadow:0 0 0 1px rgba(255,150,200,0.08), 0 20px 60px rgba(0,0,0,0.8);
+  aspect-ratio:1/1; width:100%%; position:relative;
+}
+#planetCanvas { width:100%%; height:100%%; display:block; }
+.planet-name {
+  text-align:center; color:#ffd700; font-size:22px; font-weight:900; margin-top:14px;
+  text-shadow:0 0 20px rgba(255,215,0,0.7), 0 0 40px rgba(255,150,0,0.4);
+}
+.planet-desc { color:rgba(200,180,255,0.8); font-size:14px; margin-top:6px; line-height:1.7; text-align:center; }
+.facts-card {
+  background:rgba(255,255,255,0.04); backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px); border:1px solid rgba(255,150,200,0.2);
+  border-radius:24px; padding:22px 20px; margin-bottom:18px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.facts-title { font-size:17px; font-weight:900; color:#ffb3c6; text-align:center; margin-bottom:16px; }
+.fact-row { display:flex; justify-content:space-between; align-items:center;
+  padding:11px 0; border-bottom:1px solid rgba(255,150,200,0.1); }
+.fact-row:last-child { border-bottom:none; }
+.fact-label { font-size:13px; color:rgba(255,255,255,0.5); }
+.fact-value { font-size:14px; font-weight:700; color:#fff; }
+.next-btn {
+  display:block; width:100%%; padding:16px;
+  background:linear-gradient(135deg,#ff4d6d,#b30000);
+  color:white; border:none; border-radius:30px;
+  font-size:17px; font-weight:bold; cursor:pointer;
+  box-shadow:0 6px 24px rgba(255,77,109,0.4);
+  font-family:'Tajawal',Arial,sans-serif;
+}
+</style>
+</head>
+<body>
+<div class="planet-wrap">
+  <div class="page-title">🌍 كوكبنا الخاص</div>
+  <div class="page-sub">رسمت كوكب بالاسمين عليه في الفضاء 🚀</div>
+  <div class="space-card"><canvas id="planetCanvas"></canvas></div>
+  <div class="planet-name">كوكب عبدو وبنوته 💫</div>
+  <div class="planet-desc">في مكان ما في الكون.. في كوكب اسمه حبنا<br>❤️ بعيد عن أي حاجة تأذينا</div>
+  <br>
+  <div class="facts-card">
+    <div class="facts-title">🔭 معلومات الكوكب</div>
+    <div class="fact-row"><span class="fact-label">الاسم</span><span class="fact-value">Abdo / LeLe 💕</span></div>
+    <div class="fact-row"><span class="fact-label">المسافة من الأرض</span><span class="fact-value">بعيد عن أي مشاكل 🌌</span></div>
+    <div class="fact-row"><span class="fact-label">درجة الحرارة</span><span class="fact-value">دافي زي حبنا 🔥</span></div>
+    <div class="fact-row"><span class="fact-label">عدد السكان</span><span class="fact-value">اتنين بس - عبدو وبنوته ❤️</span></div>
+    <div class="fact-row"><span class="fact-label">الجاذبية</span><span class="fact-value">جاذبية حب مش بتخلص 💫</span></div>
+  </div>
+  <button class="next-btn" onclick="window.location.href='tree.html'">اللي بعده 👈</button>
+</div>
+<script>
+const canvas=document.getElementById('planetCanvas');
+const ctx=canvas.getContext('2d');
+function resize(){
+  const s=canvas.parentElement.clientWidth;
+  canvas.width=s*window.devicePixelRatio; canvas.height=s*window.devicePixelRatio;
+  canvas.style.width=s+'px'; canvas.style.height=s+'px';
+  ctx.scale(window.devicePixelRatio,window.devicePixelRatio);
+}
+resize();
+window.addEventListener('resize',()=>{ctx.setTransform(1,0,0,1,0,0);resize();});
+const W=()=>canvas.width/window.devicePixelRatio;
+const H=()=>canvas.height/window.devicePixelRatio;
+let bgStars=[];
+function initStars(){
+  bgStars=[];
+  for(let i=0;i<220;i++){
+    bgStars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+0.2,
+    a:Math.random(),da:(Math.random()-0.5)*0.008,twinkle:Math.random()>0.5,
+    hue:Math.random()>0.85?(Math.random()>0.5?200:30):0});
+  }
+}
+initStars();
+function drawNebula(w,h){
+  const n1=ctx.createRadialGradient(w*.2,h*.3,0,w*.2,h*.3,w*.4);
+  n1.addColorStop(0,'rgba(120,0,180,0.08)');n1.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=n1;ctx.fillRect(0,0,w,h);
+  const n2=ctx.createRadialGradient(w*.8,h*.7,0,w*.8,h*.7,w*.35);
+  n2.addColorStop(0,'rgba(0,50,180,0.07)');n2.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=n2;ctx.fillRect(0,0,w,h);
+}
+let angle=0,time=0;
+function drawPlanet(w,h,ang,t){
+  const cx=w/2,cy=h/2,r=Math.min(w,h)*.30;
+  // حلقة خلفية
+  ctx.save();ctx.translate(cx,cy);ctx.scale(1,.28);
+  const rb=ctx.createLinearGradient(-r*1.85,0,r*1.85,0);
+  rb.addColorStop(0,'rgba(180,100,160,0)');rb.addColorStop(.15,'rgba(200,130,180,.35)');
+  rb.addColorStop(.5,'rgba(255,200,230,.55)');rb.addColorStop(.85,'rgba(200,130,180,.35)');rb.addColorStop(1,'rgba(180,100,160,0)');
+  ctx.beginPath();ctx.ellipse(0,0,r*1.85,r*1.85,0,Math.PI,0);
+  ctx.strokeStyle=rb;ctx.lineWidth=r*.28;ctx.stroke();
+  const rb2=ctx.createLinearGradient(-r*2.1,0,r*2.1,0);
+  rb2.addColorStop(0,'rgba(150,80,130,0)');rb2.addColorStop(.5,'rgba(220,160,200,.3)');rb2.addColorStop(1,'rgba(150,80,130,0)');
+  ctx.beginPath();ctx.ellipse(0,0,r*2.1,r*2.1,0,Math.PI,0);
+  ctx.strokeStyle=rb2;ctx.lineWidth=r*.1;ctx.stroke();ctx.restore();
+  // جسم الكوكب
+  ctx.save();ctx.translate(cx,cy);
+  const pg=ctx.createRadialGradient(-r*.3,-r*.3,r*.05,0,0,r);
+  pg.addColorStop(0,'#ff9ab0');pg.addColorStop(.2,'#e8305a');
+  pg.addColorStop(.5,'#b00030');pg.addColorStop(.75,'#7a0020');pg.addColorStop(1,'#3a0010');
+  ctx.beginPath();ctx.arc(0,0,r,0,2*Math.PI);ctx.fillStyle=pg;ctx.fill();
+  ctx.beginPath();ctx.arc(0,0,r,0,2*Math.PI);ctx.clip();
+  for(let i=0;i<6;i++){
+    const by=-r+(i*r*.38)+((t*.4*(i%2===0?1:-1))%(r*.38));
+    const ba=.03+i*.015;
+    ctx.fillStyle=i%2===0?`rgba(255,100,140,${ba})`:`rgba(180,0,60,${ba})`;
+    ctx.fillRect(-r,by-r*.07,r*2,r*.14);
+  }
+  const hi=ctx.createRadialGradient(-r*.3,-r*.35,0,-r*.3,-r*.35,r*.55);
+  hi.addColorStop(0,'rgba(255,255,255,.32)');hi.addColorStop(.4,'rgba(255,200,220,.1)');hi.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=hi;ctx.fillRect(-r,-r,r*2,r*2);
+  const ng=ctx.createRadialGradient(r*.5,r*.1,0,r*.5,0,r*1.0);
+  ng.addColorStop(0,'rgba(0,0,30,0)');ng.addColorStop(.5,'rgba(0,0,20,.3)');ng.addColorStop(1,'rgba(0,0,10,.65)');
+  ctx.fillStyle=ng;ctx.fillRect(-r,-r,r*2,r*2);ctx.restore();
+  // توهج
+  ctx.save();ctx.translate(cx,cy);
+  const glow=ctx.createRadialGradient(0,0,r*.9,0,0,r*1.55);
+  glow.addColorStop(0,'rgba(220,0,80,.28)');glow.addColorStop(.5,'rgba(180,0,60,.1)');glow.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.beginPath();ctx.arc(0,0,r*1.55,0,2*Math.PI);ctx.fillStyle=glow;ctx.fill();ctx.restore();
+  // القلب
+  ctx.save();ctx.translate(cx,cy);
+  const pulse=1+Math.sin(t*.05)*.12;
+  ctx.font=`bold ${r*.42*pulse}px Arial`;
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.shadowColor='rgba(255,100,150,.9)';ctx.shadowBlur=22;
+  ctx.fillText('❤️',0,r*.02);ctx.restore();
+  // حلقة أمامية
+  ctx.save();ctx.translate(cx,cy);ctx.scale(1,.28);
+  const rf=ctx.createLinearGradient(-r*1.85,0,r*1.85,0);
+  rf.addColorStop(0,'rgba(180,100,160,0)');rf.addColorStop(.15,'rgba(200,130,180,.5)');
+  rf.addColorStop(.5,'rgba(255,210,235,.75)');rf.addColorStop(.85,'rgba(200,130,180,.5)');rf.addColorStop(1,'rgba(180,100,160,0)');
+  ctx.beginPath();ctx.ellipse(0,0,r*1.85,r*1.85,0,0,Math.PI);
+  ctx.strokeStyle=rf;ctx.lineWidth=r*.28;ctx.stroke();
+  const rf2=ctx.createLinearGradient(-r*2.1,0,r*2.1,0);
+  rf2.addColorStop(0,'rgba(150,80,130,0)');rf2.addColorStop(.5,'rgba(220,160,200,.45)');rf2.addColorStop(1,'rgba(150,80,130,0)');
+  ctx.beginPath();ctx.ellipse(0,0,r*2.1,r*2.1,0,0,Math.PI);
+  ctx.strokeStyle=rf2;ctx.lineWidth=r*.1;ctx.stroke();ctx.restore();
+  // قمر
+  const ma=ang*2.5,md=r*1.75;
+  const mx=cx+Math.cos(ma)*md,my=cy+Math.sin(ma)*md*.3,mr=r*.12;
+  if(my>cy-r*.7){
+    const mg=ctx.createRadialGradient(mx-mr*.3,my-mr*.3,0,mx,my,mr);
+    mg.addColorStop(0,'#fff5dc');mg.addColorStop(.5,'#e8d080');mg.addColorStop(1,'#a09000');
+    ctx.beginPath();ctx.arc(mx,my,mr,0,2*Math.PI);
+    ctx.fillStyle=mg;ctx.shadowColor='rgba(255,240,100,.6)';
+    ctx.shadowBlur=14;ctx.fill();ctx.shadowBlur=0;
+  }
+}
+function animate(){
+  const w=W(),h=H();
+  const bg=ctx.createRadialGradient(w*.3,h*.2,0,w*.5,h*.5,w*.8);
+  bg.addColorStop(0,'#0d0030');bg.addColorStop(.5,'#050018');bg.addColorStop(1,'#000008');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+  drawNebula(w,h);
+  bgStars.forEach(s=>{
+    if(s.twinkle){s.a+=s.da;if(s.a>1||s.a<0.1)s.da*=-1;}
+    ctx.beginPath();ctx.arc(s.x*w,s.y*h,s.r,0,2*Math.PI);
+    if(s.hue===200)ctx.fillStyle=`rgba(150,200,255,${s.a})`;
+    else if(s.hue===30)ctx.fillStyle=`rgba(255,230,150,${s.a})`;
+    else ctx.fillStyle=`rgba(255,255,255,${s.a})`;
+    ctx.fill();
+  });
+  drawPlanet(w,h,angle,time);
+  angle+=.005;time++;
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
