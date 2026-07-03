@@ -1,0 +1,337 @@
+<!DOCTYPE html><html lang="ar"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Message</title>
+<style>
+* { box-sizing: border-box; }
+/* كرت الفيديو الأخير فقط */
+
+.last-video-card {
+    padding: 10px;
+}
+
+/* الفيديو نفسه */
+.last-video {
+    width: 1%;
+    height: 550px;          /* المقاس اللي تحبيه */
+    border-radius: 18px;
+    object-fit: cover;     /* TikTok style */
+    background: black;
+}
+
+/* لو عايزة تمنعي أي تكبير غصب */
+.last-video::-webkit-media-controls-fullscreen-button {
+    display: none;
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #7b0000, #b30000);
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.lock-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    pointer-events: none;
+    animation: fall linear infinite;
+    opacity: .9;
+    z-index: 1;
+}
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    z-index: 2;
+}
+
+.card {
+    background: #fff;
+    border-radius: 30px;
+    padding: 25px 20px 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.year {
+    background: #b22222;
+    color: white;
+    padding: 8px 30px;
+    border-radius: 25px;
+    font-size: 18px;
+    display: inline-block;
+    animation: yearPulse 2.5s ease-in-out infinite;
+}
+@keyframes yearPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05) translateY(-4px); }
+    100% { transform: scale(1); }
+}
+
+.wave {
+    animation: wave 3s ease-in-out infinite;
+}
+@keyframes wave {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+    100% { transform: translateY(0); }
+}
+
+input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 16px;
+    border-radius: 35px;
+    background: #b22222;
+    color: white;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+}
+.next-btn {
+    width: fit-content !important;
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 12px 32px !important;
+    font-size: 15px !important;
+    border-radius: 30px !important;
+    background: linear-gradient(135deg, #ff4d6d, #b30000) !important;
+    color: white !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    margin-top: 16px !important;
+}
+
+.icons span {
+    font-size: 26px;
+    margin: 6px;
+    display: inline-block;
+    animation: wave 2.6s ease-in-out infinite;
+}
+.icons span:nth-child(2){animation-delay:.2s}
+.icons span:nth-child(3){animation-delay:.4s}
+.icons span:nth-child(4){animation-delay:.6s}
+.icons span:nth-child(5){animation-delay:.8s}
+
+.dear {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #b30000;
+    text-shadow:
+        0 0 6px rgba(255,255,255,0.8),
+        0 0 12px rgba(255,200,200,0.8),
+        0 0 20px rgba(255,150,150,0.9);
+    animation: softWave 4s ease-in-out infinite;
+}
+@keyframes softWave {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+.letter-wrapper {
+    max-height: 55vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+.letter {
+    text-align: right;
+    line-height: 2.1;
+    color: #7b0000;
+    font-size: 15.5px;
+    font-weight: 700;
+}
+.letter-paragraph {
+    margin-bottom: 24px;
+}
+
+.header-bar {
+    background: #ff7aa2;
+    color: white;
+   
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+.memories-title {
+    color: #ffb3c6;
+    font-size: 26px;
+    font-family: cursive;
+    margin: 10px 0 20px;
+    text-align: center;
+}
+.memory-card {
+    background: #fff;
+    border-radius: 25px;
+    padding: 12px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.25);
+    position: relative;
+}
+.memory-card img,
+.memory-card video {
+    width: 100%;
+    border-radius: 18px;
+}
+.memory-text {
+    text-align: center;
+    margin-top: 10px;
+    color: #7b0000;
+    font-weight: bold;
+}
+.footer-text {
+    text-align: center;
+    color: #ffdcdc;
+    font-size: 18px;
+    margin: 30px 0 15px;
+}
+.footer-btn {
+    background: #ff7aa2;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+}
+
+/* ===== الإضافة الوحيدة ===== */
+.hidden-video { display: none; }
+.video-wrapper { position: relative; }
+.play-btn {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    font-size: 32px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    cursor: pointer;
+}
+</style>
+
+<script>
+// ========== الثلج ==========
+function createSnowflake() {
+    const s = document.createElement("div");
+    s.className = "snowflake";
+    s.innerHTML = "♥️";
+    s.style.left = Math.random()*100+"vw";
+    s.style.fontSize = (Math.random()*10+10)+"px";
+    s.style.animationDuration = (Math.random()*5+5)+"s";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),10000);
+}
+setInterval(createSnowflake, 300);
+
+// ========== الموسيقى العامة ==========
+const AUDIO_SRC = "https://res.cloudinary.com/dkym3urrn/video/upload/v1777853601/Bahaa_Sultan_Ma3aya_2025_%D8%A8%D9%87%D8%A7%D8%A1_%D8%B3%D9%84%D8%B7%D8%A7%D9%86_%D9%85%D8%B9%D8%A7%D9%8A%D8%A7_%D8%A3%D8%BA%D9%86%D9%8A%D8%A9_%D9%81%D9%8A%D9%84%D9%85_%D9%88%D9%84__cut_148sec_jciivv.mp3";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const bgMusic = document.createElement('audio');
+    bgMusic.id = 'bgMusic';
+    bgMusic.loop = true;
+    bgMusic.volume = 0.3;
+    bgMusic.preload = 'auto';
+    bgMusic.src = AUDIO_SRC;
+    document.body.appendChild(bgMusic);
+
+    if (localStorage.getItem('playAudio') === 'true') {
+        // كمّل من نفس المكان اللي وقف عنده
+        const savedTime = parseFloat(localStorage.getItem('audioTime') || '0');
+        bgMusic.addEventListener('canplay', () => {
+            bgMusic.currentTime = savedTime;
+            bgMusic.play().catch(() => {
+                document.addEventListener('click', () => {
+                    if (localStorage.getItem('playAudio') === 'true') bgMusic.play().catch(()=>{});
+                }, { once: true });
+            });
+        }, { once: true });
+
+        // احفظ الـ currentTime كل ثانية
+        setInterval(() => {
+            if (!bgMusic.paused) {
+                localStorage.setItem('audioTime', bgMusic.currentTime);
+            }
+        }, 1000);
+
+        // احفظ قبل ما الصفحة تتغير
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('audioTime', bgMusic.currentTime);
+        });
+    }
+
+    document.querySelectorAll('video').forEach(video => {
+        video.addEventListener('play', () => {
+            document.querySelectorAll('video').forEach(v => { if (v !== video) v.pause(); });
+            bgMusic.pause();
+        });
+        video.addEventListener('pause', () => {
+            if (localStorage.getItem('playAudio') === 'true') bgMusic.play().catch(()=>{});
+        });
+        video.addEventListener('ended', () => {
+            if (localStorage.getItem('playAudio') === 'true') bgMusic.play().catch(()=>{});
+        });
+    });
+});
+
+function startWithAudio() {
+    localStorage.setItem('playAudio', 'true');
+    const bg = document.getElementById('bgMusic');
+    if (bg) bg.play().catch(()=>{});
+    window.location.href = 'timeline.html';
+}
+
+function playVideo() {
+    const v = document.getElementById("mainVideo");
+    const b = document.getElementById("playBtn");
+    if (v) { v.style.display = "block"; v.play(); }
+    if (b) b.style.display = "none";
+}
+</script>
+</head><body><div class="container"><div class="card"><div class="dear">عزيزتي لي لي</div><div class="wave" style="font-size:40px;">💌</div><div class="letter-wrapper"><div class="letter">
+<div class="letter-paragraph">احم احم احمممممم بصي بقا يستي دام وصلتي للمرحله دي ويارب يارب يكون الموقع الي تعبت فيه عشر ايام دا عجبك😂❤️
+</div>
+<div class="letter-paragraph">المهم يستي انا بحبك اوي ومش قادر اعبر عن فرحتي ونا شايفك بتكبري كده كأنك بنتي ونا قاعد مبسوط شايفك بتكبري وبتحلوي ف حقيقي شعور جميل اوي واول حاجه طبعا كل سنه وحبيبتي ونن عيني طيبه والعمر كلوا ليكي يا اغلي من نفسي وطول العمر ونتي جمبي وقارفاني كده بحبك بجد ي لي لي مش متخيل ازاي احنا لسه مع بعض بعد كل الخناقات دي وازاي بنرجع مهما اتفرقنا انا خلاص صدقت واقتنعت انك قدري ومكتوبلي اصل لو مش ليا مش هيبقا ليكي كل الحب دا جوايا
+</div>
+<div class="letter-paragraph">ف انا بتمني من ربنا تكوني ليا وبس نكبر سوا ونعمل عيله صغنن كده ونعيش ف سعاده وحب ورومانسيه وسهر قدام الشاشه بالليل مع الفشار والفيلم الرعب نعيش ونتي ف حضني وضهري وسندي تعيشي ونتي بنتي وحبيبتي واختي ومراتي وام عيالي وكل حاجه ليا بتمني من ربنا لو مكتبنيش ليكي ميكتبنيش لغيرك حتي لو بالموت </div>
+<div class="letter-paragraph">متعرفيش انا قد ايي حياتي حلوه بيكي مهما اتخانقنا ومهما عملتي هفضل احبك وافضل اخاف عليكي وافضل اغير عليكي وافضل ادعي تكوني ليا انتي اصلا مش مفارقه خيالي طول اليوم يعني حرام عليكي شاغله قلبي وعقلي وتفكيري وكل حاجه بقيت لم بفكر فيكي بسرح كأني خرجت من الواقع ودخلت مكان خاص بيا انا ونتي بس مكان ميسعش غير لينا احنا مكان كله رومانسيه وحياه هاديه بعيد عن الدوشه بحبك وهفضل احبك مهما كبرتي ومهما عدي من وقت ومهما كبرتي هتفضلي بنوتي الي طلعت بيها من الدنيا بنوتي الي علمتني ازاي احب بنوتي اللي وانا معاها بحس اني ماشي صح اني ف طريق اخر خير واخره جواز وعيله وبيت</div>
+<div class="letter-paragraph">الكلام اللي جوايا كتير اوي ولو قعدت عمري كلوا اتكلم واقول ف حبك والله اعمل كتب بس ف حبك بس انا كلامي مش مهم المهم انط تفضلي تحبيني تفضلي جمبي تفضلي تسنديني متسيبنيش ابدا ان قسيت عليكي ف يوم ف عشان خايف عليكي عشان بحبك عشان مش عايز اشوفك ضعيفه لحد عايزك تفضلي اقوي واقوي لان ممكن بابا يمشي ف اي وقت ومش يمشي من حياتك لا يمشي من الدنيا ف لم يمشي هيبقي مطمن ان بنوته اقوي من اي صعب وان باباها علمها ازاي تعدي كل حاجه لوحدها وتبقا اقوي من الاول كم</div>
+
+<div class="letter-paragraph">بس انا مش عايز امشي من الدنيا غير لم احقق حلمي ف يارب متاخدنيش غير لم اكون انا وبنوتي ف بيت واحد وتكون ف حضني واجيب منها اميره صغننه كده تحب باباها زي مامتها واحبها زي لولتي واجبلها كل اللي هي عايزاه وادلعها هي وروح قلبي لي لي واجبلهم شيكولاته وورد وكل حاجه حلو يارب تخليني لحد م احقق الحلم دا مش عايز احقق اي حاجه تاني غير الحلم دا وبس وبعدها امشي عادي</div>
+<div class="letter-paragraph">مش عارف ليه دمعت وانا بكتب الكلام دا😂 
+
+بس اكيد عشان كل الكلام الي بكتبه ب ايدي دا طالع بمشاعر كتيره اوي من جوا ونا دمعتي قريبه بالنسبه لمشاعري اتجاهك ودا الي اكدلي اني بحب حب محبتوش لحد قبل كده ويارب تفضلي المشاعر دي موجوده وتزيد اكتر واكتر لاني مش هقدر افكر ف حد غيرك لان من بعدك مفيش عيشه العيشه كلها كانت من بداية كلامنا لحد م تكوني ف بيتي غير كده مش عايز اكمل مش عايز احب حد مش عايز اشوف حد غيرك اصلا عايزك انتي وبس لولتي وبس 
+
+وبس ي ستي عشان مطولش عليكي كل سنه ونتي روحي وقلبي وعمري وحياتي كل سنه ونتي معايا ومنكده عليكي عيشتي بس بعيش اجمل ايام حياتي كل سنه وانا بحبك وعايزك كل سنه ونتي طيبه ينن عيني والعمر الطويل ليكي ف سعاده وحب ومشوفش فيكي حاجه وحشه ابدا بحبك اوي ينور عيني❤️❤️💋❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️🙈🙈🙈🙈🙈🙈❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</div>
+</div>
+</div></div><a href="https://wa.me/201026701026" target="_blank" style="display:inline-block;margin-top:20px;background:linear-gradient(135deg,#25D366,#128C7E);color:white;text-decoration:none;padding:14px 32px;border-radius:50px;font-size:16px;font-weight:bold;box-shadow:0 4px 20px rgba(37,211,102,0.4);">💬 يلا ارجعيلي تاني دوسي هنا</a></div></div></body></html>
